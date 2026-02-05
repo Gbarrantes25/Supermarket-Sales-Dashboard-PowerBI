@@ -17,7 +17,7 @@ Este proyecto fue elaborado con información ficticia de un supermercado. Se emp
 - Visualización: Power BI Desktop.
 - Supabase (https://supabase.com/)
 - Fuente de Datos:
-  - [Reservaciones.xlsx](https://docs.google.com/spreadsheets/d/e/2PACX-1vRdWNnJHLjaaxnecHMjJK8TAAop6xaUzc2tE5GKhMgPZyLvMDqzsVRGwXgw6ONBDgNShjCJSyITTLpV/pub?output=xlsx)
+  - [DimBranch.csv](https://github.com/Gbarrantes25/Supermarket-Sales-Dashboard-PowerBI/blob/main/Data%20Source/DimBranch.csv)
  
     
 - Lenguajes: DAX para las medidas calculadas y Power Query (Lenguaje M) para la transformación de datos.
