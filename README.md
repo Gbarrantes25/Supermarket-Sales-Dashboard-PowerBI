@@ -92,15 +92,47 @@ Este proyecto fue elaborado con información ficticia de un supermercado. Se emp
 
 ## ✅ Características Principales
 - Transformaciones en Power Query: Se realizaron procesos de limpieza y modelado de datos para optimizar el rendimiento.
-- Medidas DAX: Se implementaron cálculos para los KPI's del Revenue Management.
-  - <code>%Occ = DIVIDE([Total RNs],[RNs Disponibles],0)</code>
-  - <code>Conteo Días = COUNT(Calendario[Date])</code>
-  - <code>RNs Disponibles = SUMX(Habitaciones,Habitaciones[Cantidad de Habitaciones]*[Conteo Días])</code>
-  - <code>ADR = DIVIDE([Total Revenue],[Total RNs],0)</code>
-  - <code>Total Revenue = SUMX(Reservaciones,Reservaciones[RN]*Reservaciones[Precio Unitario])</code>
-  - <code>Total RNs = SUM(Reservaciones[RN])</code>
-  - <code>RevPar = [ADR]*[%Occ]</code>
-  - <code>Total A&B = SUM(Reservaciones[A&B])</code>
+- Creación de tabla calendario y tabla mode (mode light/dark)
+- Medidas DAX:
+  - ColourDesign:
+    <details>
+      <summary>Abrir</summary>
+      - ColourBar = IF(SELECTEDVALUE(Mode[Activo])=1,"#00ffcc","#00A383")
+    </details>
+  - Images:
+    <details>
+      <summary>Abrir</summary>
+      - <code>Img_IconGoal = 
+          SWITCH(TRUE(),
+            [#%Goal]>=0.95 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaLight.png",
+            [#%Goal]>=0.95 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaDark.png",
+            [#%Goal]>=0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaLight.png",
+            [#%Goal]>=0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaDark.png",
+            [#%Goal]<0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoLight.png",
+            [#%Goal]<0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoDark.png"
+          )
+        </code><br>
+      - <code>Img_IconGoal2 = 
+          SWITCH(TRUE(),
+            [#%GoalNotFilter]>=0.95 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaLight.png",
+            [#%GoalNotFilter]>=0.95 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaDark.png",
+            [#%GoalNotFilter]>=0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaLight.png",
+            [#%GoalNotFilter]>=0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaDark.png",
+            [#%GoalNotFilter]<0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoLight.png",
+            [#%GoalNotFilter]<0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoDark.png"
+          )
+        </code><br>
+      - <code>Img_Menubar = 
+            VAR light = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/MenuLight.png"
+            VAR dark = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/MenuDark.png"
+            RETURN IF(SELECTEDVALUE(Mode[Activo])=0,light,dark)
+        </code><br>
+      - <code>Img_MenubarClose = 
+            VAR light = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/CerrarLight.png"
+            VAR dark = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/CerrarDark.png"
+            RETURN IF(SELECTEDVALUE(Mode[Activo])=0,light,dark)
+        </code>
+    </details>
 - Medidas Formateadas DAX: Se implementaron medidas formateadas para visualizar de manera corta los números extensos ("B", "M" y "K").
   - <code>ADR*** = 
           VAR T = ABS([ADR])
