@@ -2,16 +2,20 @@
 
 
 ## 📃 Descripción General
-Este dashboard fue diseñado para analizar información ficticia de un supermercado.
+Este proyecto fue elaborado con información ficticia de un supermercado. Se empleó una base de datos remota alojada en Supabase; para la parte gráfica se empleó "tooltips", menú de navegación interactivo, y switcher para modo noche/día.
 
 
 ## 📊 Contenido del proyecto
-- Página de "Regions": Contiene una vista general por país.
-- Páginas de "Hotel Branches": Contiene una vista por sucursal de hotel.
+- Página "Overview": Contiene una vista general del análisis.
+- Página "Branch": Contiene el análisis por sucursal del supermecado.
+- Página "Customer": Contiene el análisis de los mejores clientes.
+- Página "Seller": Contiene el análisis por vendedor.
+- Página "Products" Contiene el análisis de las categorías y mejores productos.
 
 
 ## 🛠️ Herramientas y Tecnologías Utilizadas
 - Visualización: Power BI Desktop.
+- Supabase (https://supabase.com/)
 - Fuente de Datos:
   - [Reservaciones.xlsx](https://docs.google.com/spreadsheets/d/e/2PACX-1vRdWNnJHLjaaxnecHMjJK8TAAop6xaUzc2tE5GKhMgPZyLvMDqzsVRGwXgw6ONBDgNShjCJSyITTLpV/pub?output=xlsx)
  
