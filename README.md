@@ -177,24 +177,15 @@ Este proyecto fue elaborado con información ficticia de un supermercado. Se emp
 <details>
   <summary>Capturas</summary>
 
-
-  Página "Regions"
-
-
-  ![Animation1](https://github.com/user-attachments/assets/0d3de5f3-ae65-43e6-abc6-72e97e6a6be9)
-
-
-  Página "Hotel Branches"
-
-
-  ![Animation2](https://github.com/user-attachments/assets/0d347ecd-a7cb-496e-940e-a18ad0723a01)
-
-
+  <img width="1894" height="1064" alt="image" src="https://github.com/user-attachments/assets/be13fcfc-a3b5-4dca-8e7d-14471dcb7072" />
+  <img width="1883" height="1054" alt="image" src="https://github.com/user-attachments/assets/fd9e6fe1-4336-4bb8-8c04-e0a22c7adaad" />
+  <img width="1874" height="1049" alt="image" src="https://github.com/user-attachments/assets/c701d2ff-c488-4699-ab92-5839d05dfec3" />
+  <img width="1881" height="1045" alt="image" src="https://github.com/user-attachments/assets/071ede32-2c46-4135-93de-5f1b19ad0c26" />
 </details>
 
 <details>
   <summary>Video</summary>
-  https://www.youtube.com/watch?v=TMqiaGSsMXk
+  https://youtu.be/NiG0zqzfKKQ?si=KqO9DkIukfFloHaU
 </details>
 
 
