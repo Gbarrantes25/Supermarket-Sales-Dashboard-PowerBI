@@ -282,8 +282,10 @@ Este proyecto fue elaborado con información ficticia de un supermercado. Se emp
 		- CardUnits_Products = https://uiverse.io/vamsidevendrakumar/soft-shrimp-94
 	</details>
   - Others:
-       - <code>FilterBranchSeller = COUNT(FactSales[Id_Vendedor])</code>
-			
+    - <details><summary>Abrir</summary>
+		- <code>FilterBranchSeller = COUNT(FactSales[Id_Vendedor])</code>
+	</details>
+
 - Diseño Interactivo: Uso de paginado para navegación, tooltips, marcadores y segmentación de datos.
 
 ## 🖼️ Vistas Previas del proyecto
