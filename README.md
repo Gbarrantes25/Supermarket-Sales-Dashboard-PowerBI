@@ -133,45 +133,105 @@ Este proyecto fue elaborado con información ficticia de un supermercado. Se emp
             RETURN IF(SELECTEDVALUE(Mode[Activo])=0,light,dark)
         </code>
     </details>
-- Medidas Formateadas DAX: Se implementaron medidas formateadas para visualizar de manera corta los números extensos ("B", "M" y "K").
-  - <code>ADR*** = 
-          VAR T = ABS([ADR])
-          RETURN
-              SWITCH(TRUE(),
-                  T >= 1000000000, FORMAT(T, "$#,,,.00 B"),
-                  T >= 1000000, FORMAT(T, "$#,,.00 M"),
-                  T >= 1000, FORMAT(T, "$#,.00 K"),
-                      SUBSTITUTE(FORMAT(T, "$#.00"),",","."))
-    </code>
-  - <code>RNs*** = 
-          VAR T = [Total RNs]
-          RETURN
-              SWITCH(TRUE(),
-                  T >= 1000000000, FORMAT(T, "#,,,.00 B"),
-                  T >= 1000000, FORMAT(T, "#,,.00 M"),
-                  T >= 1000, FORMAT(T, "#,.00 K"),
-                      FORMAT(T,"0"))
-    </code>
-  - <code>Revenue*** = 
-          VAR T = [Total Revenue]
-          RETURN
-              SWITCH(TRUE(),
-                  T >= 1000000000, FORMAT(T, "$#,,,.00 B"),
-                  T >= 1000000, FORMAT(T, "$#,,.00 M"),
-                  T >= 1000, FORMAT(T, "$#,.00 K"),
-                      FORMAT(T,"$0.00"))
-    </code>
-  - <code>A&B*** = 
-          VAR T = [Total A&B]
-          RETURN
-              SWITCH(TRUE(),
-                  T >= 1000000000, FORMAT(T, "$#,,,.00 B"),
-                  T >= 1000000, FORMAT(T, "$#,,.00 M"),
-                  T >= 1000, FORMAT(T, "$#,.00 K"),
-                      FORMAT(T,"$0"))
-    </code>
-- Diseño Interactivo: Uso de paginado para navegación y segmentación de datos.
+  - KPIS:
+    <details>
+      <summary>Abrir</summary>
+      - <code>#%AccuRankCategory = 
+                VAR sales = CALCULATE([#TotalSales],ALL(DimProducts[Categoria]))
+                RETURN DIVIDE([#AccuRankCategory],sales,0)
+        </code><br>
+      - <code>#%AccuRankProduct = 
+              VAR sales = CALCULATE([#TotalSales],ALL(DimProducts[Producto]))
+              RETURN DIVIDE([#AccuRankProduct],sales,0)
+        </code><br>
+      - <code>#%ActiveCustomers = 
+              	VAR referencedate = LASTDATE(ALL(FactSales[Fecha]))
+              	VAR startdate = referencedate - 90
+              	VAR result = CALCULATE(
+              		DISTINCTCOUNT(FactSales[Id_Cliente]),
+              		FactSales[Fecha] >= startdate
+              	)
+	              VAR customers = DISTINCTCOUNT(FactSales[Id_Cliente])
+              	RETURN
+              		DIVIDE(result,customers,0)
+        </code><br>
+      - <code>#%Goal = 
+              VAR _goal = DIVIDE([#TotalSales],[#TotalBudget],0)
+              VAR _result = IF(_goal>1,1,_goal)
+              RETURN _result
+        </code><br>
+      - <code>#%GoalNotFilter = 
+              VAR _sales = CALCULATE([#TotalSales],ALL(DimSeller[Vendedor]))
+              VAR _budget = CALCULATE([#TotalBudget],ALL(DimSeller[Vendedor]))
+              VAR _goal = DIVIDE(_sales,_budget,0)
+              VAR _result = IF(_goal>1,1,_goal)
+              RETURN _result
+        </code><br>
+      - <code>#%MoM = 
+              VAR _value = DIVIDE([#TotalSales],[#TotalSalesPreviusMonth],0)-1
+              RETURN IF(_value>=0,"▲"& FORMAT(_value,"#0.00%","En-US"),"▼"&FORMAT(_value,"#0.00%","En-Us"))
+        </code><br>
+      - <code>#%TotalSaleAll = 
+              VAR _customer = HASONEVALUE(DimCustomer[Nombre])
+              VAR _seller = HASONEVALUE(DimSeller[Vendedor])
+              VAR _branch = HASONEVALUE(DimBranch[Tienda])
+              RETURN 
+                  SWITCH(TRUE(),
+                      _customer,[#%TotalSalesCustomer],
+                      _seller,[#%TotalSalesSeller],
+                      _branch,[#%TotalSalesBranch])
+        </code><br>
+      - <code>#%TotalSalesBranch = 
+              VAR sales = CALCULATE([#TotalSales],ALL(DimBranch[Tienda]))
+              RETURN DIVIDE([#TotalSales],sales,0)
+        </code><br>
+      - <code>#%TotalSalesCategory = 
+              VAR sales = CALCULATE([#TotalSales],ALL(DimProducts[Categoria]))
+              RETURN DIVIDE([#TotalSales],sales,0)
+        </code><br>
+      - <code>#%TotalSalesCustomer = 
+              VAR sales = CALCULATE([#TotalSales],ALL(DimCustomer[Nombre]))
+              RETURN DIVIDE([#TotalSales],sales,0)
+        </code><br>
+      - <code>#%TotalSalesProducts = 
+              VAR sales = CALCULATE([#TotalSales],ALL(DimProducts[Producto]))
+              RETURN DIVIDE([#TotalSales],sales,0)
+        </code><br>
+      - <code>#%TotalSalesSeller = 
+              VAR sales = CALCULATE([#TotalSales],ALL(DimSeller[Vendedor]))
+              RETURN DIVIDE([#TotalSales],sales,0)
+        </code><br>
+      - <code>#AccuRankCategory = 
+              VAR tbt = ADDCOLUMNS(ALL(DimProducts[Categoria]),"Total",[#TotalSales],"Rank",RANKX(ALL(DimProducts[Categoria]),[#TotalSales],,DESC))
+              VAR ranknow = RANKX(ALL(DimProducts[Categoria]),[#TotalSales],,DESC)
+              RETURN
+                  SUMX(
+                      FILTER(tbt,[Rank]<=ranknow),[#TotalSales])
+        </code><br>
+    - <code>#AccuRankProduct = 
+              VAR tbt = ADDCOLUMNS(ALL(DimProducts[Producto]),"Total",[#TotalSales],"Rank",RANKX(ALL(DimProducts[Producto]),[#TotalSales],,DESC))
+              VAR ranknow = RANKX(ALL(DimProducts[Producto]),[#TotalSales],,DESC)
+              RETURN
+                  SUMX(
+                      FILTER(tbt,[Rank]<=ranknow),[#TotalSales])
+      </code><br>
+    - <code>#AccuSales = TOTALYTD([#TotalSales],'Calendar'[Date])
+      </code><br>
+    - <code>#AverageTicket = 
+              VAR transactions = DISTINCTCOUNT(FactSales[Id_transaccion])
+              RETURN DIVIDE([#TotalSales],transactions,0)
+      </code><br>
+    - <code>#AverageUnitPrice = AVERAGEX(DimProducts,DimProducts[Precio_Unit])</code><br>
+    - <code>#CustomersPortfolio = 
+              VAR ReferenceDate = LASTDATE(ALL(FactSales[Fecha]))
+              VAR StartDate = ReferenceDate-90
+              VAR Customers = CALCULATE(DISTINCTCOUNT(FactSales[Id_Cliente]),FactSales[Fecha]<StartDate)
+              RETURN Customers</code><br>
+    - <code>#GAPSelling = [#TotalSales]-[#TotalBudget]</code>
+    </details>
 
+    
+- Diseño Interactivo: Uso de paginado para navegación, tooltips, marcadores y segmentación de datos.
 
 ## 🖼️ Vistas Previas del proyecto
 <details>
