@@ -95,42 +95,40 @@ Este proyecto fue elaborado con información ficticia de un supermercado. Se emp
 - Creación de tabla calendario y tabla mode (mode light/dark)
 - Medidas DAX:
   - ColourDesign:
-    <details>
-      <summary>Abrir</summary>
-      - ColourBar = IF(SELECTEDVALUE(Mode[Activo])=1,"#00ffcc","#00A383")
-    </details>
+  	- <details><summary>Abrir</summary>
+		- ColourBar = IF(SELECTEDVALUE(Mode[Activo])=1,"#00ffcc","#00A383")
+    	</details>
   - Images:
-    <details>
-      <summary>Abrir</summary>
-      - <code>Img_IconGoal = 
-          SWITCH(TRUE(),
-            [#%Goal]>=0.95 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaLight.png",
-            [#%Goal]>=0.95 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaDark.png",
-            [#%Goal]>=0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaLight.png",
-            [#%Goal]>=0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaDark.png",
-            [#%Goal]<0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoLight.png",
-            [#%Goal]<0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoDark.png"
-          )
+  	-  <details><summary>Abrir</summary>
+		- <code>Img_IconGoal = 
+	          SWITCH(TRUE(),
+	            [#%Goal]>=0.95 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaLight.png",
+	            [#%Goal]>=0.95 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaDark.png",
+	            [#%Goal]>=0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaLight.png",
+	            [#%Goal]>=0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaDark.png",
+	            [#%Goal]<0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoLight.png",
+	            [#%Goal]<0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoDark.png"
+	          )
         </code><br>
-      - <code>Img_IconGoal2 = 
-          SWITCH(TRUE(),
-            [#%GoalNotFilter]>=0.95 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaLight.png",
-            [#%GoalNotFilter]>=0.95 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaDark.png",
-            [#%GoalNotFilter]>=0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaLight.png",
-            [#%GoalNotFilter]>=0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaDark.png",
-            [#%GoalNotFilter]<0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoLight.png",
-            [#%GoalNotFilter]<0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoDark.png"
-          )
+		- <code>Img_IconGoal2 = 
+	          SWITCH(TRUE(),
+	            [#%GoalNotFilter]>=0.95 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaLight.png",
+	            [#%GoalNotFilter]>=0.95 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/ArribaDark.png",
+	            [#%GoalNotFilter]>=0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaLight.png",
+	            [#%GoalNotFilter]>=0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/FlechaDark.png",
+	            [#%GoalNotFilter]<0.85 && SELECTEDVALUE(Mode[Activo])=0,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoLight.png",
+	            [#%GoalNotFilter]<0.85 && SELECTEDVALUE(Mode[Activo])=1,"https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/AbajoDark.png"
+	          )
         </code><br>
-      - <code>Img_Menubar = 
-            VAR light = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/MenuLight.png"
-            VAR dark = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/MenuDark.png"
-            RETURN IF(SELECTEDVALUE(Mode[Activo])=0,light,dark)
+		- <code>Img_Menubar = 
+	            VAR light = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/MenuLight.png"
+	            VAR dark = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/MenuDark.png"
+	            RETURN IF(SELECTEDVALUE(Mode[Activo])=0,light,dark)
         </code><br>
-      - <code>Img_MenubarClose = 
-            VAR light = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/CerrarLight.png"
-            VAR dark = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/CerrarDark.png"
-            RETURN IF(SELECTEDVALUE(Mode[Activo])=0,light,dark)
+		- <code>Img_MenubarClose = 
+	            VAR light = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/CerrarLight.png"
+	            VAR dark = "https://raw.githubusercontent.com/Gbarrantes25/Supermarket-Sales-Dashboard/refs/heads/main/Images/CerrarDark.png"
+	            RETURN IF(SELECTEDVALUE(Mode[Activo])=0,light,dark)
         </code>
     </details>
   - KPIS:
