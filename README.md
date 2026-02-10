@@ -285,7 +285,50 @@ Este proyecto fue elaborado con información ficticia de un supermercado. Se emp
     - <details><summary>Abrir</summary>
 		- <code>FilterBranchSeller = COUNT(FactSales[Id_Vendedor])</code>
 	</details>
-
+- UDF:
+	- <details><summary>Función Fx_FormatNumber</summary>
+		- <code>
+			FUNCTION Fx_FormatNumber = (_Measure: expr ) =>
+		VAR _value = _Measure
+		RETURN
+			SWITCH(
+				TRUE(),
+				_value >= 1000000 || _value <= -1000000, FORMAT(
+					_value,
+					"#,0,,.00 M"
+				),
+				_value >= 1000 || _value <= -1000, FORMAT(
+					_value,
+					"#,0,.00 K"
+				),
+				FORMAT(
+					_value,
+					"#,0"
+				)
+			)
+		</code></details>
+	- <details><summary>Fx_FormatNumberUSD</summary>
+		- <code>
+			FUNCTION Fx_FormatNumberUSD = (_Measure: expr ) =>
+		VAR _value = _Measure
+		RETURN
+			SWITCH(
+				TRUE(),
+				_value >= 1000000 || _value <= -1000000, FORMAT(
+					_value,
+					"$#,0,,.00 M"
+				),
+				_value >= 1000 || _value <= -1000, FORMAT(
+					_value,
+					"$#,0,.00 K"
+				),
+				FORMAT(
+					_value,
+					"$#,0"
+				)
+			)
+		</code>
+	</details>
 - Diseño Interactivo: Uso de paginado para navegación, tooltips, marcadores y segmentación de datos.
 
 ## 🖼️ Vistas Previas del proyecto
